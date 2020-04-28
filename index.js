@@ -5,7 +5,7 @@ const app = express();
 const home = require('./routes/home.js');
 const todos = require('./routes/todos.js');
 const db = require('./config/db.js');
-
+const port = 9000 || process.env.port;
 
 app.use(bodyParser.json());
 let now = date.asString(new Date());
@@ -22,7 +22,7 @@ db.sequelize.sync({force:true}).then( async () =>{
     let thirdRec = await db.tasks.create({taskDescription:'Cook Dinner',userID:'Sneha1204',addedDate: now, updatedDate: now, status : 'Not Started'});
     let fourthRec = await db.tasks.create({taskDescription:'Clean utensils',userID:'John11',addedDate: now, updatedDate: now, status : 'Not Started'});
     console.log("4 records are added to database");
-    app.listen(8000, () => {
-      console.log("app has started on port",8000);
+    app.listen(port, () => {
+      console.log("app has started on port",port);
     })
   })
